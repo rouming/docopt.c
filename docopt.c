@@ -977,9 +977,9 @@ static void yacc_dump(struct ctx *ctx)
 			}
 			list_for_each_entry(arg, &grp->args, argsent) {
 				if (iarg++ == 0)
-					fprintf(out, "%s:\n%*s | %s ", grp->name,
+					fprintf(out, "%s:\n%*s | ", grp->name,
 						(int)strlen(grp->name) - 1,
-						"", grp->name);
+						"");
 				else if (sep) {
 					sep = false;
 					fprintf(out, "%*s | %s ",
