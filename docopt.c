@@ -1085,7 +1085,7 @@ static void path_nosuff(const char *path, char *buf, size_t size)
 
 static int ctx_setupout(struct ctx *ctx, const char *docoptpath)
 {
-	char filen[PATH_MAX];
+	char filen[PATH_MAX-3];
 	char path[PATH_MAX];
 
 	path_nosuff(docoptpath, filen, sizeof(filen));
