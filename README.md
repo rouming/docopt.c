@@ -1,5 +1,6 @@
 C-code generator for docopt language based on Yacc & Lex
 ========================================================
+[![License](https://img.shields.io/badge/license-zlib-blue.svg)](https://opensource.org/licenses/Zlib)
 
 ### Step 1. Describe your CLI in docopt language
 
