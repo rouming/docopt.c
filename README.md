@@ -2,6 +2,24 @@ C-code generator for docopt language based on Yacc & Lex
 ========================================================
 [![License](https://img.shields.io/badge/license-zlib-blue.svg)](https://opensource.org/licenses/Zlib)
 
+## Development setup
+
+### Dependencies
+
+#### macOS
+Install Developer Tools (XCode + CLI tools), homebrew, then:
+
+    brew install flex bison cmake
+
+### Configure and build
+
+    git clone <this repo> <path>
+    cd <path>
+    mkdir build
+    cd build
+    cmake ..
+    cmake --build .
+
 ### Step 1. Describe your CLI in docopt language
 
 ```

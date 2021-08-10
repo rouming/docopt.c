@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <assert.h>
+#ifdef __linux__
 #include <linux/limits.h>
+#endif
 
 #include "docopt.tab.h"
 #include "docopt.h"
