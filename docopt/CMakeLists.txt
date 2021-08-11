@@ -22,17 +22,33 @@ include(FindBISON)
 find_package(BISON REQUIRED)
 find_package(FLEX REQUIRED)
 
-BISON_TARGET(MyParser "docopt.y" ${CMAKE_CURRENT_BINARY_DIR}/parser.c)
-FLEX_TARGET(MyScanner "docopt.l" ${CMAKE_CURRENT_BINARY_DIR}/lexer.c)
+BISON_TARGET(
+        MyParser
+        "${CMAKE_CURRENT_SOURCE_DIR}/docopt.y"
+        "${CMAKE_CURRENT_BINARY_DIR}/docopt.tab.c"
+        COMPILE_FLAGS "-v -gdocopt.grm.dot --defines --debug"
+)
+FLEX_TARGET(
+        MyScanner
+        "${CMAKE_CURRENT_SOURCE_DIR}/docopt.l"
+        "${CMAKE_CURRENT_BINARY_DIR}/docopt.lex.c"
+)
+
 ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
 set(Header_Files "docopt.h") #  "${CMAKE_BINARY_DIR}/config/${PROJECT_NAME}Config.h"
-source_group("Header Files" FILES "${Header_Files}")
+source_group("Header Files"
+             FILES
+             "${CMAKE_BINARY_DIR}/docopt.tab.c" "${CMAKE_BINARY_DIR}/docopt.lex.c" "docopt.c")
 
 set(Source_Files "docopt.c")
 source_group("Source Files" FILES "${Source_Files}")
+
+# TODO: Remove this hack
+file(GLOB all_c_files *.h *.c)
+file(COPY ${all_c_files} DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
 
 add_executable(
         "${EXEC_NAME}"
@@ -76,4 +92,4 @@ endif ()
 install(TARGETS ${installable_libs}
         DESTINATION "bin"
         EXPORT "${EXEC_NAME}Targets")
-#install(FILES "${_export_file}" "${Header_Files}" DESTINATION "include")
+install(FILES "${Header_Files}" DESTINATION "include")

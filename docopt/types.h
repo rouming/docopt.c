@@ -15,7 +15,26 @@
 		const typeof( ((type *)0)->member ) *__mptr = (ptr);    \
 		(type *)( (char *)__mptr - offsetof(type,member) );})
 
+#if __STDC_VERSION__ >= 199901L
 typedef _Bool bool;
+#else
+#include <stdlib.h>
+typedef size_t bool;
+#endif
+
+#ifdef true
+#undef true
+#endif
+#ifdef false
+#undef false
+#endif
+
+#ifdef __has_extension
+#define INLINE inline
+#else
+#define INLINE
+#endif
+
 enum {
 	false	= 0,
 	true	= 1

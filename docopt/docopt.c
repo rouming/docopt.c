@@ -4,9 +4,40 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <assert.h>
-#ifdef __linux__
+
+
+#if defined(_AIX)
+
+#include <sys/limits.h>
+
+#elif defined(__FreeBSD__) || defined(__NetBSD__) \
+|| defined(__OpenBSD__) || defined(__bsdi__) \
+|| defined(__DragonFly__) || defined(macintosh) \
+|| defined(__APPLE__) || defined(__APPLE_CC__)
+
+#ifdef __CC_SUPPORTS_WARNING
+#define ____CC_SUPPORTS_WARNING __CC_SUPPORTS_WARNING
+#undef __CC_SUPPORTS_WARNING
+#include <sys/syslimits.h>
+#define __CC_SUPPORTS_WARNING ____CC_SUPPORTS_WARNING
+#undef ____CC_SUPPORTS_WARNING
+#else
+#include <sys/syslimits.h>
+#endif
+
+#elif defined(__HAIKU__)
+
+#include <system/user_runtime.h>
+
+#elif defined(__linux__) || defined(linux) || defined(__linux)
+
+#include <linux/version.h>
+
+#if LINUX_VERSION_CODE <= KERNEL_VERSION(2,6,22)
+
 #include <linux/limits.h>
 #endif
+#endif /* OS version check for limits.h */
 
 #include "docopt.tab.h"
 #include "docopt.h"

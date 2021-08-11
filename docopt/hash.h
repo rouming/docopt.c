@@ -14,7 +14,7 @@
  * from requirements by Colin Plumb.
  * (http://burtleburtle.net/bob/hash/doobs.html)
  */
-static inline unsigned int jhash(const char *key, size_t len)
+static INLINE unsigned int jhash(const char *key, size_t len)
 {
 	unsigned int hash, i;
 
@@ -42,7 +42,7 @@ struct hash_table {
 	struct list_head list;
 };
 
-static inline void hash_init(struct hash_table *tbl)
+static INLINE void hash_init(struct hash_table *tbl)
 {
 	int i;
 
@@ -51,7 +51,7 @@ static inline void hash_init(struct hash_table *tbl)
 		INIT_LIST_HEAD(&tbl->buckets[i]);
 }
 
-static inline void
+static INLINE void
 hash_entry_init(struct hash_entry *e, const void *key,
 		size_t key_len)
 {
@@ -59,7 +59,7 @@ hash_entry_init(struct hash_entry *e, const void *key,
 	e->key_len = key_len;
 }
 
-static inline struct hash_entry *
+static INLINE struct hash_entry *
 hash_lookup(struct hash_table *tbl, const void *key,
 	    size_t key_len, unsigned int *hint)
 {
@@ -82,7 +82,7 @@ hash_lookup(struct hash_table *tbl, const void *key,
 	return NULL;
 }
 
-static inline void
+static INLINE void
 hash_insert(struct hash_table *tbl, struct hash_entry *e,
 	    unsigned int *hint)
 {
@@ -98,7 +98,7 @@ hash_insert(struct hash_table *tbl, struct hash_entry *e,
 	list_add_tail(&e->listent, &tbl->list);
 }
 
-static inline void
+static INLINE void
 hash_remove(struct hash_entry *e)
 {
 	list_del(&e->buckent);

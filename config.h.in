@@ -2,8 +2,8 @@
 #define DOCOPT_CONFIG_H
 
 /* the configured options and settings for docopt */
-#define DOCOPT_VERSION_MAJOR @docopt_VERSION_MAJOR@
-#define DOCOPT_VERSION_MINOR @docopt_VERSION_MINOR@
-#define DOCOPT_VERSION_PATCH @docopt_VERSION_PATCH@
+#define DOCOPT_VERSION_MAJOR @docopt_c_VERSION_MAJOR@
+#define DOCOPT_VERSION_MINOR @docopt_c_VERSION_MINOR@
+#define DOCOPT_VERSION_PATCH @docopt_c_VERSION_PATCH@
 
 #endif /* DOCOPT_CONFIG_H */
